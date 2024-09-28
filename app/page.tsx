@@ -1,12 +1,9 @@
 import CurriculumForm from '@/components/CurriculumForm'
+import Home from '@/components/pages/Home'
 import React from 'react'
 
 const page = () => {
-  return (
-    <div className='container mx-auto h-screen flex items-center justify-center w-full'>
-      <CurriculumForm />
-    </div>
-  )
+  return <Home />
 }
 
 export default page
