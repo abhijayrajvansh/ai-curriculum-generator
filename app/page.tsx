@@ -1,4 +1,3 @@
-import CurriculumForm from '@/components/CurriculumForm'
 import Home from '@/components/pages/Home'
 import React from 'react'
 
