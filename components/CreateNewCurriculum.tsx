@@ -3,7 +3,7 @@ import CurriculumForm from './CurriculumForm'
 
 const CreateNewCurriculum = () => {
   return (
-    <div className='bred wrapper h-screen'>
+    <div className='wrapper h-screen'>
       <CurriculumForm />
     </div>
   )
