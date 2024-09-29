@@ -38,6 +38,7 @@ const CurriculumForm = () => {
   };
 
   const handleContinue = () => setStep((prev) => prev + 1);
+  const handlePrevious = () => setStep((curr) => curr - 1);
 
   return (
     <div className="w-full   flex justify-center">
@@ -111,9 +112,15 @@ const CurriculumForm = () => {
             </div>
           </div>
 
+          <div className="flex items-center gap-3 mt-5">
+          <Button type="button" variant={"outline"} onClick={handlePrevious} className="w-fit">
+            Back
+          </Button>
+
           <Button type="button" onClick={handleSubmit} className="w-fit">
             Generate Curriculum
           </Button>
+          </div>
         </div>
       )}
     </div>

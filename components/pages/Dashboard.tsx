@@ -1,10 +1,12 @@
 import React from "react";
-import CurriculumForm from "../CurriculumForm";
+import CreateNewCurriculum from "../CreateNewCurriculum";
+import Link from "next/link";
 
 const Dashboard = () => {
   return (
     <div className="wrapper mt-20">
-      <CurriculumForm />
+      Dashboard
+      <Link className="text-blue-600 underline underline-offset-2" href={'/dashboard/new'}>create new curriculum</Link>
     </div>
   );
 };
