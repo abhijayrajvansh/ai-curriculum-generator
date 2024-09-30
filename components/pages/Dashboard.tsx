@@ -49,8 +49,8 @@ const Dashboard = () => {
           <div className="flex w-full justify-around py-3 mb-2 font-semibold items-center bg-[#c88889]/50 rounded-md">
             <div>Sr. No:</div>
             <div>Curriculum Name</div>
-            <div>Created At</div>
             <div>Created By</div>
+            <div>Created At</div>
           </div>
 
           {/* list of all curriculums */}
