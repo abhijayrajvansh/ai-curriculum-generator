@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { FaFileExport } from "react-icons/fa6";
 import {
   Select,
   SelectContent,
@@ -16,7 +17,7 @@ import { useChat } from "ai/react";
 import Markdown from "markdown-to-jsx";
 
 const CurriculumForm = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
 
   const handleContinue = () => setStep((curr) => curr + 1);
   const handlePrevious = () => setStep((curr) => curr - 1);
@@ -53,7 +54,7 @@ const CurriculumForm = () => {
   };
 
   return (
-    <div className="max-w-screen-2xl flex justify-center">
+    <div className="max-w-screen-xl flex justify-center">
       {step === 1 && (
         <div className="flex flex-col w-full lg:w-1/2 gap-3">
           <div className="text-4xl font-medium">Name your Curriculum</div>
@@ -223,7 +224,7 @@ const CurriculumForm = () => {
               Back
             </Button>
 
-            {/* <Button className="bg-yellow-200" variant={'outline'} onClick={() => console.log(input)}>log prompt</Button> */}
+            {/* <Button className="bg-yellow-200" variant={'outline'} onClick={() => console.log(input)}>log prompt </Button> */}
 
             <Button type="button" onClick={handleGenerate} className="w-fit">
               Generate Curriculum
@@ -233,49 +234,14 @@ const CurriculumForm = () => {
       )}
 
       {step === 4 && (
-        <div className="flex w-full h-screen">
-          <div className="flex flex-col w-full mt-10 h-screen lg:w-1/2 gap-3">
+        <div className="flex h-screen">
+          <div className="flex flex-col w-full mt-10 h-screen  gap-3">
             <div className="text-4xl font-medium">Generating curriculum</div>
-            <div className="block text-sm font-medium text-gray-600 mb-5">
+            <div className="block text-sm font-medium text-gray-600 mb-3">
               hooray! your curriculum is being generated, please wait...
             </div>
-            <div className="p-4 rounded-md sm:min-w-[500px] bg-white border w-fit">
-              <div>
-                <span className="text-lg font-semibold">
-                  Curriculum Name:&nbsp;&nbsp;
-                </span>
-                <span className="text-lg">{formParams.curriculumName}</span>
-              </div>
-              <div>
-                <span className="text-lg font-semibold">
-                  Course Topic:&nbsp;&nbsp;
-                </span>
-                <span className="text-lg">{formParams.topic}</span>
-              </div>
-              <div>
-                {formParams.industry && (
-                  <div>
-                    <span className="text-lg font-semibold">
-                      Industry:&nbsp;&nbsp;
-                    </span>
-                    <span className="text-lg">{formParams.industry}</span>
-                  </div>
-                )}
-              </div>
-              <div className="text-lg">
-                <span className="font-semibold">
-                  Your current level:&nbsp;&nbsp;
-                </span>
-                {formParams.level}
-              </div>
-              <div className="text-lg">
-                <span className="font-semibold">
-                  Duration of training:&nbsp;&nbsp;
-                </span>
-                {formParams.duration}
-              </div>
-            </div>
-            <div className="flex items-center gap-3 mt-5">
+          
+            <div className="flex items-center gap-3">
               <Button
                 type="button"
                 variant={"outline"}
@@ -295,15 +261,17 @@ const CurriculumForm = () => {
               </Button>
               <Button
                 type="button"
-                onClick={stop}
-                // className="bg-[#5f6c5f]/90 hover:bg-[#5f6c5f]"
+                // onClick={} add export function here...
+                className="bg-[#5f6c5f]/90 hover:bg-[#5f6c5f]"
                 disabled
               >
-                Save
+                <div className="flex gap-3">
+                Save and Export
+                <FaFileExport size={20} className="text-white"/>
+                </div>
               </Button>
             </div>
-          </div>
-          <div className="w-1/2 px-2">
+          
             <div>
               Software Engineering Learning Roadmap (4 Weeks) Week 1:
               Fundamentals of Software Engineering Day 1: Introduction to
