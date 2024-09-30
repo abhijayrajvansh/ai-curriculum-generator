@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 30 29% 97%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -69,7 +69,7 @@
 
 @layer components {
   .wrapper {
-    @apply container mx-auto flex flex-col items-center justify-center w-full px-4
+    @apply flex flex-col px-4 justify-center w-full
   }
 }
 
