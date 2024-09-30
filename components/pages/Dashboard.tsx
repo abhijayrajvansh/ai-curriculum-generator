@@ -30,7 +30,7 @@ const Dashboard = () => {
     <>
       <Sidebar />
       <div className="flex items-center justify-center">
-        <div className="wrapper container mt-12 sm:ml-[60px] lg:ml-64">
+        <div className="flex flex-col px-4 justify-center mx-auto w-full mt-12 sm:ml-[60px] lg:ml-64">
           <div className="flex justify-between">
             <div className="mb-5 ">
               <div className="text-4xl font-semibold">

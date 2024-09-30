@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { FaFileExport } from "react-icons/fa6";
@@ -15,20 +15,59 @@ import {
 } from "@/components/ui/select";
 import { useChat } from "ai/react";
 import Markdown from "markdown-to-jsx";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const CurriculumForm = () => {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
 
   const handleContinue = () => setStep((curr) => curr + 1);
   const handlePrevious = () => setStep((curr) => curr - 1);
 
   const [formParams, setFormParams] = useState({
-    curriculumName: "sample curriculum name",
-    topic: "software engineering",
-    industry: "technical",
-    level: "beginner",
-    duration: "4 weeks",
+    curriculumName: "",
+    topic: "",
+    industry: "",
+    level: "",
+    duration: "",
   });
+
+  const generatedPdfRef = useRef<HTMLDivElement | null>(null);
+
+  const exportAsPDF = (fileName: string = 'curriculum'): void => {
+    const input = generatedPdfRef.current;
+
+    if (!input) return; // Add a check to ensure input is not null or undefined
+
+    html2canvas(input)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "mm", "a4", true);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+
+        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+        const imgX = (pdfWidth - imgWidth * ratio) / 2;
+        const imgY = 30;
+
+        pdf.addImage(
+          imgData,
+          "PNG",
+          imgX,
+          imgY,
+          imgWidth * ratio,
+          imgHeight * ratio
+        );
+        pdf.save(`${fileName}.pdf`);
+        console.log(fileName);
+      })
+      .catch((error) => {
+        console.error("Error generating PDF: ", error);
+      });
+  };
 
   const handleChange = (name: string, value: string | number) => {
     setFormParams((prevValues) => ({
@@ -54,7 +93,7 @@ const CurriculumForm = () => {
   };
 
   return (
-    <div className="flex justify-center bred">
+    <div className="flex justify-center">
       {step === 1 && (
         <div className="flex flex-col w-full lg:w-1/2 gap-3">
           <div className="text-4xl font-semibold">Name your Curriculum</div>
@@ -261,9 +300,9 @@ const CurriculumForm = () => {
               </Button>
               <Button
                 type="button"
-                // onClick={} add export function here...
+                onClick={() => exportAsPDF(formParams.curriculumName)}
                 className="bg-[#5f6c5f]/90 hover:bg-[#5f6c5f]"
-                disabled
+                disabled={isLoading}
               >
                 <div className="flex gap-3">
                   Save and Export
@@ -275,16 +314,62 @@ const CurriculumForm = () => {
             {/* {messages.map((message) => (
               <div key={message.id}>
                 {message.role !== "user" && (
-                  <div className="border p-1 bg-white">
+                  <div
+                    ref={generatedPdfRef}
+                    className="border p-1 bg-white my-5"
+                  >
                     <Markdown>{message.content}</Markdown>
                   </div>
-                  
                 )}
               </div>
             ))} */}
 
-            <div className="border p-1 bg-white">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut tempore sequi esse eum? Voluptate sapiente accusamus ipsa adipisci nobis minus dignissimos quaerat natus nesciunt! Magni odit saepe, incidunt ab deleniti at eos dicta ratione ut nam, rerum aut ea magnam aliquid temporibus fugiat porro sit, itaque ex nobis numquam? Consequatur iusto, corrupti dolorum dolor pariatur facere modi quo, dicta optio accusantium, cupiditate maxime ea? Consequuntur, sed ducimus. Laboriosam pariatur, autem temporibus necessitatibus ex eaque exercitationem aperiam ipsam distinctio praesentium facilis quam! Accusamus eius nesciunt ab, dolore tempore cumque facilis at neque iste eos adipisci repudiandae. Dolore facere quibusdam optio maxime rerum eius aliquid sed ad ab, dolorum architecto, aut quam. Obcaecati, qui! Voluptates, tempore. Vel explicabo illum accusamus quaerat aspernatur ex eius! Distinctio consectetur saepe assumenda inventore veniam laborum asperiores natus. Veritatis, quam nemo? Sequi aspernatur natus unde beatae numquam dicta doloremque aliquid, eligendi explicabo sed quam laudantium quae veritatis adipisci alias eaque earum asperiores ab aliquam incidunt eveniet. Possimus ducimus necessitatibus minus quibusdam corrupti numquam repudiandae nam non amet ad quidem quisquam iusto, dignissimos corporis iure, pariatur consequatur blanditiis commodi suscipit quia quasi? Adipisci exercitationem quaerat beatae, odit quidem fugit veritatis. Neque debitis voluptates blanditiis voluptatum nam ipsa laudantium rerum dolor aliquid alias. Nemo excepturi repellendus quo recusandae saepe, consectetur ipsa sequi aut, libero explicabo dolorem. Voluptate iste dignissimos dolorem reprehenderit similique facere illo dolore, autem id. Minus necessitatibus molestiae earum quo aliquid fugit alias deserunt, excepturi rerum adipisci enim maxime quae nihil ut facilis corrupti tempora dolor pariatur tenetur eaque nesciunt? Non excepturi, doloremque incidunt libero quos enim laborum molestias sint velit facere repellat ex placeat cumque maiores esse. Quaerat natus possimus animi repellendus, eaque nam doloribus veritatis aperiam voluptatibus eos. Esse dignissimos voluptas nemo autem voluptatum deleniti! Consequatur vel distinctio fugiat asperiores placeat culpa quasi voluptate labore.
+            <div className="border p-1 bg-white my-5">
+              Comprehensive Learning Roadmap: Mastering Full-Stack Development
+              and Landing a $100K Remote Job Offer Duration: 30 days Objective:
+              By the end of this program, you will have gained the skills and
+              knowledge required to become a proficient full-stack developer and
+              increase your chances of landing a $100K remote job offer. Day
+              1-5: Fundamentals of Programming and Data Structures Day 1: Topic:
+              Introduction to programming Task: Set up a coding environment
+              (IDE, text editor, etc.) Exercise: Complete online tutorials on
+              basic syntax, data types, and control structures (e.g.,
+              Codecademy, FreeCodeCamp) Day 2: Topic: Data structures (arrays,
+              linked lists, stacks, queues) Task: Implement basic data structure
+              operations in a programming language Exercise: Write code to
+              implement stack, queue, and linked list operations Day 3: Topic:
+              Algorithms (sorting, searching, recursion) Task: Understand the
+              time and space complexity of common algorithms Exercise: Analyze
+              and optimize a simple algorithm for sorting an array Day 4: Topic:
+              Object-Oriented Programming (OOP) concepts Task: Implement basic
+              OOP principles in a programming language Exercise: Create a simple
+              class with inheritance, polymorphism, and encapsulation Day 5:
+              Topic: Review of fundamental concepts Task: Complete online
+              quizzes or coding challenges to reinforce understanding Exercise:
+              Participate in online communities (e.g., HackerRank, LeetCode) to
+              practice problem-solving Day 6-10: Front-end Development Day 6:
+              Topic: Introduction to front-end development Task: Set up a basic
+              HTML/CSS project Exercise: Create a simple web page with CSS
+              styling and layout Day 7: Topic: JavaScript basics (variables,
+              data types, functions) Task: Implement basic JavaScript
+              functionality in an HTML project Exercise: Write code to create
+              interactive elements (e.g., buttons, forms) using JavaScript Day
+              8: Topic: Front-end frameworks (React, Angular, Vue.js) Task:
+              Choose a framework and set up a new project Exercise: Complete
+              tutorials or coding challenges for the chosen framework Day 9:
+              Topic: CSS preprocessors (Sass, Less) Task: Implement basic Sass
+              or Less functionality in an HTML project Exercise: Write code to
+              create reusable styles using Sass or Less Day 10: Topic: Review of
+              front-end concepts Task: Complete online quizzes or coding
+              challenges to reinforce understanding Exercise: Participate in
+              online communities (e.g., Frontend Masters, CSS-Tricks) to
+              practice problem-solving Day 11-15: Back-end Development Day 11:
+              Topic: Introduction to back-end development Task: Set up a basic
+              Node.js project Exercise: Create a simple server using Express.js
+              and handle HTTP requests Day 12: Topic: Database fundamentals
+              (relational, NoSQL) Task: Choose a database type and set up a new
+              project Exercise: Complete tutorials or coding challenges for the
+              chosen database
             </div>
           </div>
         </div>
