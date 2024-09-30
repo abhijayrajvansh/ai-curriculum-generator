@@ -54,7 +54,7 @@ const CurriculumForm = () => {
   };
 
   return (
-    <div className="max-w-screen-xl flex justify-center">
+    <div className="flex justify-center bred">
       {step === 1 && (
         <div className="flex flex-col w-full lg:w-1/2 gap-3">
           <div className="text-4xl font-semibold">Name your Curriculum</div>
@@ -234,7 +234,7 @@ const CurriculumForm = () => {
       )}
 
       {step === 4 && (
-        <div className="flex h-screen w-full">
+        <div className="flex h-screen xl:w-[800px]">
           <div className="flex flex-col w-full mt-10 h-screen gap-3">
             <div className="text-4xl font-semibold">Generating curriculum</div>
             <div className="block text-sm font-medium text-gray-600 mb-3">
@@ -272,7 +272,7 @@ const CurriculumForm = () => {
               </Button>
             </div>
 
-            {messages.map((message) => (
+            {/* {messages.map((message) => (
               <div key={message.id}>
                 {message.role !== "user" && (
                   <div className="border p-1 bg-white">
@@ -281,7 +281,11 @@ const CurriculumForm = () => {
                   
                 )}
               </div>
-            ))}
+            ))} */}
+
+            <div className="border p-1 bg-white">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut tempore sequi esse eum? Voluptate sapiente accusamus ipsa adipisci nobis minus dignissimos quaerat natus nesciunt! Magni odit saepe, incidunt ab deleniti at eos dicta ratione ut nam, rerum aut ea magnam aliquid temporibus fugiat porro sit, itaque ex nobis numquam? Consequatur iusto, corrupti dolorum dolor pariatur facere modi quo, dicta optio accusantium, cupiditate maxime ea? Consequuntur, sed ducimus. Laboriosam pariatur, autem temporibus necessitatibus ex eaque exercitationem aperiam ipsam distinctio praesentium facilis quam! Accusamus eius nesciunt ab, dolore tempore cumque facilis at neque iste eos adipisci repudiandae. Dolore facere quibusdam optio maxime rerum eius aliquid sed ad ab, dolorum architecto, aut quam. Obcaecati, qui! Voluptates, tempore. Vel explicabo illum accusamus quaerat aspernatur ex eius! Distinctio consectetur saepe assumenda inventore veniam laborum asperiores natus. Veritatis, quam nemo? Sequi aspernatur natus unde beatae numquam dicta doloremque aliquid, eligendi explicabo sed quam laudantium quae veritatis adipisci alias eaque earum asperiores ab aliquam incidunt eveniet. Possimus ducimus necessitatibus minus quibusdam corrupti numquam repudiandae nam non amet ad quidem quisquam iusto, dignissimos corporis iure, pariatur consequatur blanditiis commodi suscipit quia quasi? Adipisci exercitationem quaerat beatae, odit quidem fugit veritatis. Neque debitis voluptates blanditiis voluptatum nam ipsa laudantium rerum dolor aliquid alias. Nemo excepturi repellendus quo recusandae saepe, consectetur ipsa sequi aut, libero explicabo dolorem. Voluptate iste dignissimos dolorem reprehenderit similique facere illo dolore, autem id. Minus necessitatibus molestiae earum quo aliquid fugit alias deserunt, excepturi rerum adipisci enim maxime quae nihil ut facilis corrupti tempora dolor pariatur tenetur eaque nesciunt? Non excepturi, doloremque incidunt libero quos enim laborum molestias sint velit facere repellat ex placeat cumque maiores esse. Quaerat natus possimus animi repellendus, eaque nam doloribus veritatis aperiam voluptatibus eos. Esse dignissimos voluptas nemo autem voluptatum deleniti! Consequatur vel distinctio fugiat asperiores placeat culpa quasi voluptate labore.
+            </div>
           </div>
         </div>
       )}
