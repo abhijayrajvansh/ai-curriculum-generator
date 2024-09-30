@@ -34,8 +34,11 @@ const CurriculumForm = () => {
 
   const generatedPdfRef = useRef<HTMLDivElement | null>(null);
 
-  const exportAsPDF = (fileName: string = 'curriculum'): void => {
+  const exportAsPDF = (fileName: string): void => {
     const input = generatedPdfRef.current;
+    let pdfFileName = fileName
+
+    if (!pdfFileName) pdfFileName = 'curriculum';
 
     if (!input) return; // Add a check to ensure input is not null or undefined
 
@@ -61,8 +64,7 @@ const CurriculumForm = () => {
           imgWidth * ratio,
           imgHeight * ratio
         );
-        pdf.save(`${fileName}.pdf`);
-        console.log(fileName);
+        pdf.save(`${pdfFileName}.pdf`);
       })
       .catch((error) => {
         console.error("Error generating PDF: ", error);
@@ -324,7 +326,7 @@ const CurriculumForm = () => {
               </div>
             ))} */}
 
-            <div className="border p-1 bg-white my-5">
+            <div ref={generatedPdfRef} className="border p-1 bg-white my-5">
               Comprehensive Learning Roadmap: Mastering Full-Stack Development
               and Landing a $100K Remote Job Offer Duration: 30 days Objective:
               By the end of this program, you will have gained the skills and
