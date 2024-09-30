@@ -113,7 +113,7 @@ const CurriculumForm = () => {
             className="bg-white"
           />
 
-          <Button type="button" onClick={handleContinue} className="w-fit">
+          <Button type="button" onClick={handleContinue} className="bg-[#5f6c5f] hover:bg-[#5f6c5f]/90 w-fit">
             Continue
           </Button>
         </div>
@@ -205,7 +205,7 @@ const CurriculumForm = () => {
             <Button
               type="button"
               onClick={() => handleSave()}
-              className="w-fit"
+              className="bg-[#5f6c5f] hover:bg-[#5f6c5f]/90 w-fit"
             >
               Continue
             </Button>
@@ -267,7 +267,7 @@ const CurriculumForm = () => {
 
             {/* <Button className="bg-yellow-200" variant={'outline'} onClick={() => console.log(input)}>log prompt </Button> */}
 
-            <Button type="button" onClick={handleGenerate} className="w-fit">
+            <Button type="button" onClick={handleGenerate} className="bg-[#5f6c5f] hover:bg-[#5f6c5f]/90 w-fit">
               Generate Curriculum
             </Button>
           </div>
@@ -307,7 +307,7 @@ const CurriculumForm = () => {
                 disabled={isLoading}
               >
                 <div className="flex gap-3">
-                  Save and Export
+                  Export as pdf
                   <FaFileExport size={20} className="text-white" />
                 </div>
               </Button>
@@ -326,6 +326,7 @@ const CurriculumForm = () => {
               </div>
             ))} */}
 
+            {/* dummy pdf sample */}
             <div ref={generatedPdfRef} className="border p-1 bg-white my-5">
               Comprehensive Learning Roadmap: Mastering Full-Stack Development
               and Landing a $100K Remote Job Offer Duration: 30 days Objective:
@@ -372,6 +373,8 @@ const CurriculumForm = () => {
               (relational, NoSQL) Task: Choose a database type and set up a new
               project Exercise: Complete tutorials or coding challenges for the
               chosen database
+
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati est, voluptates placeat architecto quia facere rerum voluptatum a nobis nostrum doloribus omnis vitae tenetur eos ad sunt consequatur harum neque voluptatibus recusandae. Nulla, minus. Obcaecati, aperiam vero. Recusandae, deleniti? Cupiditate vero quod voluptatibus illum voluptatum, omnis dolorem tempore quas et temporibus quam cumque a laboriosam totam veniam itaque! Optio et maiores laboriosam ducimus, ut autem. Sapiente officiis id, alias eum cumque soluta debitis recusandae praesentium modi tenetur autem doloribus distinctio quae aliquid expedita reiciendis. Voluptatum quas hic ducimus, odit odio saepe cumque molestias quisquam laborum natus corrupti! Sunt sint temporibus omnis illo, aliquam dolore quos doloribus rem exercitationem saepe placeat. Repellendus magni nesciunt voluptates suscipit inventore, facere aliquid sint doloribus nobis culpa amet accusantium fugit voluptatibus quae. Ipsum, ea velit asperiores ullam sequi harum. Velit quas officiis accusantium cumque nobis repudiandae facere voluptatem sequi vero inventore labore in tempore, error maxime quisquam consequuntur ullam nulla dignissimos dicta excepturi eius, animi odio? Doloribus rem eum at, quisquam hic alias et odio est assumenda. Quam aliquam ratione, numquam quidem dolorem cum soluta nisi distinctio consequatur. Repellendus provident vel quae accusantium aliquid quas nam! Ex autem quidem, corporis quasi praesentium sit dolorum illum, quis voluptatum ratione at dicta impedit odit blanditiis consectetur molestias officia quo! Hic fugit maiores, at itaque voluptatum beatae adipisci? Reprehenderit nemo ab dolore ratione tenetur eligendi odit dicta explicabo aliquam libero illum quis excepturi adipisci aut id corrupti, quos deserunt inventore ipsa iure unde quaerat dolorem eaque similique. Dignissimos aspernatur tempora porro labore a. Non harum corrupti, esse animi officiis voluptates doloremque quidem. Quas, voluptatem vitae inventore blanditiis expedita harum, aperiam repudiandae voluptatibus provident voluptate deserunt enim, eveniet quae laudantium ea. Voluptates iste, veniam voluptate esse, atque accusamus qui saepe nisi obcaecati ratione natus animi laborum consequatur ex eum adipisci ad sapiente necessitatibus numquam expedita reiciendis corporis id? Culpa at maiores inventore dicta eaque explicabo rem in consequatur voluptatibus facere, quas eius dignissimos quidem voluptates ea sunt asperiores saepe sed excepturi laboriosam omnis? Dolorem quis distinctio totam, iste illo repudiandae consequatur, beatae in culpa pariatur fugiat nesciunt velit iusto quisquam atque, officia accusamus temporibus reiciendis ratione unde quos voluptatum corporis! Aliquid, voluptas amet earum nisi placeat eius facilis beatae ipsa sit maiores veritatis soluta voluptatem fuga delectus saepe neque dolor officia accusantium ipsam debitis minus ut tempore veniam. Illo sint consequuntur culpa, possimus sequi amet commodi magnam eligendi quod ut pariatur asperiores rem voluptatem velit laudantium accusamus, dicta exercitationem inventore labore voluptas perferendis. Eius illo quas earum ut doloremque minus quaerat aspernatur, minima tenetur commodi cupiditate esse? Quae tempore, quidem obcaecati ipsa tenetur esse voluptatibus rerum perferendis dolore quas, eum voluptatum magnam beatae et, consectetur quia sunt asperiores soluta alias! Adipisci et alias reiciendis ratione provident fugiat exercitationem, quasi, perspiciatis sapiente nesciunt ullam doloribus? Excepturi id repudiandae repellendus eaque fugiat commodi ducimus. Eligendi voluptas amet doloremque placeat molestiae atque voluptatibus! Rem harum deserunt eius incidunt earum, quos quasi enim natus facilis nisi quaerat eos facere modi asperiores quidem esse!
             </div>
           </div>
         </div>

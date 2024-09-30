@@ -7,22 +7,10 @@ import { BiPlusCircle } from "react-icons/bi";
 const curriculum_data = [
   {
     srn: "1",
-    curriculumName: "Software Engineering Roadmap",
-    createdAt: "Abhijay Rajvansh",
+    curriculumName: "Curriculum 1",
+    createdAt: "Abhijay",
     createdBy: "30th September 2024",
-  },
-  {
-    srn: "1",
-    curriculumName: "Software Engineering Roadmap",
-    createdAt: "Abhijay Rajvansh",
-    createdBy: "30th September 2024",
-  },
-  {
-    srn: "1",
-    curriculumName: "Software Engineering Roadmap",
-    createdAt: "Abhijay Rajvansh",
-    createdBy: "30th September 2024",
-  },
+  }
 ];
 
 const Dashboard = () => {
