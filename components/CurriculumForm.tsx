@@ -141,7 +141,7 @@ const CurriculumForm = () => {
             />
           </div>
 
-          <div className="space-y-2 mt-3 flex items-center gap-3">
+          <div className="space-y-2 flex items-center gap-3">
             <div className="w-full space-y-2">
               <p className="block text-sm font-medium text-gray-600">
                 Enter duration
@@ -156,7 +156,7 @@ const CurriculumForm = () => {
               />
             </div>
             <div className="w-full space-y-2 pb-2">
-              <label className="block text-sm font-semibold text-gray-600">
+              <label className="block text-sm font-medium text-gray-600">
                 Select your current level:
               </label>
               <Select onValueChange={(value) => handleChange("level", value)}>

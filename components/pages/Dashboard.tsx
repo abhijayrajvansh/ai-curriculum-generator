@@ -10,6 +10,12 @@ const curriculum_data = [
     curriculumName: "Curriculum 1",
     createdAt: "Abhijay",
     createdBy: "30th September 2024",
+  },
+  {
+    srn: "1",
+    curriculumName: "Curriculum 1",
+    createdAt: "Abhijay",
+    createdBy: "30th September 2024",
   }
 ];
 
@@ -43,9 +49,9 @@ const Dashboard = () => {
 
           {/* list of all curriculums */}
           
-          <div className="rounded-md bg-[#4e564e]">
+          
             {curriculum_data.map((item) => (
-              <div className="flex w-full justify-around py-4 items-center text-white border border-background">
+              <div className="flex w-full justify-around py-3 items-center bg-[#4e564e] text-white rounded border border-background">
                 <div>{item.srn}</div>
                 <div>{item.curriculumName}</div>
                 <div>{item.createdAt}</div>
@@ -54,7 +60,6 @@ const Dashboard = () => {
             ))}
           </div>
         </div>
-      </div>
     </>
   );
 };
