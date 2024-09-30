@@ -57,7 +57,7 @@ const CurriculumForm = () => {
     <div className="max-w-screen-xl flex justify-center">
       {step === 1 && (
         <div className="flex flex-col w-full lg:w-1/2 gap-3">
-          <div className="text-4xl font-medium">Name your Curriculum</div>
+          <div className="text-4xl font-semibold">Name your Curriculum</div>
           <p>What would you like to name your roadmap?</p>
 
           <p className="block text-sm font-medium text-gray-600 mt-5">
@@ -80,13 +80,13 @@ const CurriculumForm = () => {
 
       {step === 2 && (
         <div className="flex flex-col w-full lg:w-1/2 gap-3">
-          <div className="text-4xl font-medium">Create an outline</div>
+          <div className="text-4xl font-semibold">Create an outline</div>
           <p>
             Use the power of AI to generate an outline based on a description of
             your ccourse.
           </p>
 
-          <div className="space-y-2 mt-3">
+          <div className="space-y-2">
             <p className="block text-sm font-medium text-gray-600 mt-5">
               Enter your topic
             </p>
@@ -115,7 +115,7 @@ const CurriculumForm = () => {
               />
             </div>
             <div className="w-full space-y-2 pb-2">
-              <label className="block text-sm font-medium text-gray-600">
+              <label className="block text-sm font-semibold text-gray-600">
                 Select your current level:
               </label>
               <Select onValueChange={(value) => handleChange("level", value)}>
@@ -174,7 +174,7 @@ const CurriculumForm = () => {
 
       {step === 3 && (
         <div className="flex flex-col w-full lg:w-1/2 gap-3">
-          <div className="text-4xl font-medium">Confirm your outline</div>
+          <div className="text-4xl font-semibold">Confirm your outline</div>
           <div className="block text-sm font-medium text-gray-600 mb-5">
             kindly confirm check all your parameters.
           </div>
@@ -236,9 +236,9 @@ const CurriculumForm = () => {
       {step === 4 && (
         <div className="flex h-screen w-full">
           <div className="flex flex-col w-full mt-10 h-screen gap-3">
-            <div className="text-4xl font-medium">Generating curriculum</div>
+            <div className="text-4xl font-semibold">Generating curriculum</div>
             <div className="block text-sm font-medium text-gray-600 mb-3">
-              hooray! your curriculum is being generated, please wait...
+              sit back & relax, your curriculum is being generated...
             </div>
 
             <div className="flex items-center gap-3">
@@ -272,7 +272,7 @@ const CurriculumForm = () => {
               </Button>
             </div>
 
-            {/* {messages.map((message) => (
+            {messages.map((message) => (
               <div key={message.id}>
                 {message.role !== "user" && (
                   <div className="border p-1 bg-white">
@@ -281,11 +281,7 @@ const CurriculumForm = () => {
                   
                 )}
               </div>
-            ))} */}
-
-            <div className="border p-1 bg-white w-full">
-              Lorem300
-            </div>
+            ))}
           </div>
         </div>
       )}
