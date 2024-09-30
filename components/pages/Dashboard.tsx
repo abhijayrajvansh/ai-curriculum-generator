@@ -53,7 +53,9 @@ const Dashboard = () => {
             <div>Created By</div>
           </div>
 
-          <div className="rounded-md bg-[#3a413a]">
+          {/* list of all curriculums */}
+          
+          <div className="rounded-md bg-[#4e564e]">
             {curriculum_data.map((item) => (
               <div className="flex w-full justify-around py-4 items-center text-white border border-background">
                 <div>{item.srn}</div>

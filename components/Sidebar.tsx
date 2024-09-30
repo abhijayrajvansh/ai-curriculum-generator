@@ -33,6 +33,7 @@ export default function Sidebar() {
             <div className="font-semibold text-xl hidden lg:block">Dashboard</div>
           </div>
 
+         
           {NAVIGATION_DATA.map((item) => {
             let currentPathname = "/" + item.link
 
