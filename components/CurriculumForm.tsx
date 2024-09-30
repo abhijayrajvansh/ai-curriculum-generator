@@ -234,13 +234,13 @@ const CurriculumForm = () => {
       )}
 
       {step === 4 && (
-        <div className="flex h-screen">
-          <div className="flex flex-col w-full mt-10 h-screen  gap-3">
+        <div className="flex h-screen w-full">
+          <div className="flex flex-col w-full mt-10 h-screen gap-3">
             <div className="text-4xl font-medium">Generating curriculum</div>
             <div className="block text-sm font-medium text-gray-600 mb-3">
               hooray! your curriculum is being generated, please wait...
             </div>
-          
+
             <div className="flex items-center gap-3">
               <Button
                 type="button"
@@ -266,56 +266,26 @@ const CurriculumForm = () => {
                 disabled
               >
                 <div className="flex gap-3">
-                Save and Export
-                <FaFileExport size={20} className="text-white"/>
+                  Save and Export
+                  <FaFileExport size={20} className="text-white" />
                 </div>
               </Button>
             </div>
-          
-            <div>
-              Software Engineering Learning Roadmap (4 Weeks) Week 1:
-              Fundamentals of Software Engineering Day 1: Introduction to
-              Software Engineering Theory Module: Definition, Scope, and
-              Importance of Software Engineering Practical Lab: Create a simple
-              project plan using Agile methodologies Hands-on Exercise: Plan a
-              small software project (e.g., a calculator app) Day 2: Programming
-              Fundamentals Theory Module: Data Types, Variables, Control
-              Structures, Functions, and Object-Oriented Programming (OOP)
-              concepts Practical Lab: Write simple programs in Python or Java to
-              practice basic programming concepts Hands-on Exercise: Implement a
-              calculator program using OOP principles Day 3: Software
-              Development Life Cycle (SDLC) Theory Module: Phases of SDLC,
-              including Requirements Gathering, Analysis, Design,
-              Implementation, Testing, and Maintenance Practical Lab: Create a
-              simple use case diagram using UML notation Hands-on Exercise: Plan
-              a small project's requirements gathering phase Day 4: Version
-              Control Systems Theory Module: Introduction to Git, GitHub, and
-              other version control systems Practical Lab: Set up a Git
-              repository and practice basic branching and merging techniques
-              Hands-on Exercise: Create a simple commit history using Git Week
-              2: Programming Languages and Data Structures Day 5: Data
-              Structures Theory Module: Arrays, Linked Lists, Stacks, Queues,
-              Trees (Binary Search Trees, AVL Trees), and Graphs Practical Lab:
-              Implement basic data structures in Python or Java Hands-on
-              Exercise: Write a program to implement a stack using an array Day
-              6: Object-Oriented Programming (OOP) Concepts Theory Module:
-              Inheritance, Polymorphism, Encapsulation, and Abstraction
-              Practical Lab: Implement OOP concepts in Python or Java Hands-on
-              Exercise: Create a simple class hierarchy using inheritance Day 7:
-              Functional Programming Theory Module: Introduction to functional
-              programming principles, including recursion, higher-order
-              functions, and immutable data structures Practical Lab: Write
-              programs in Haskell or Lisp that demonstrate functional
-              programming concepts Hands-on Exercise: Implement a recursive
-              function in Python or Java
-            </div>
-            {messages.map((message) => (
+
+            {/* {messages.map((message) => (
               <div key={message.id}>
                 {message.role !== "user" && (
-                  <Markdown>{message.content}</Markdown>
+                  <div className="border p-1 bg-white">
+                    <Markdown>{message.content}</Markdown>
+                  </div>
+                  
                 )}
               </div>
-            ))}
+            ))} */}
+
+            <div className="border p-1 bg-white w-full">
+              Lorem300
+            </div>
           </div>
         </div>
       )}
