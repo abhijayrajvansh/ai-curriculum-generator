@@ -14,7 +14,7 @@ const NAVIGATION_DATA = [
     link: "dashboard",
   },
   {
-    title: "Create new curriculum",
+    title: "Add new",
     icon: BiPlusCircle,
     link: "dashboard/new",
   },
