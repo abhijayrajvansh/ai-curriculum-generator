@@ -5,29 +5,29 @@ import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 
 interface TextEditorProps {
-  curriculumName: string;
   messages: string;
+  generatedPdfRef: React.RefObject<any>
 }
 
-const TextEditor = ({ curriculumName, messages }: TextEditorProps) => {
+const TextEditor = ({ messages, generatedPdfRef }: TextEditorProps) => {
   const { quill, quillRef } = useQuill();
 
   useEffect(() => {
     if (quill && messages) {
-      // Get current HTML content of the editor
       const currentContent = quill.root.innerHTML;
       const htmlContent = messages;
 
-      // Only update if the new content is different
       if (currentContent.trim() !== htmlContent.trim()) {
         quill.clipboard.dangerouslyPasteHTML(htmlContent);
       }
     }
-  }, [quill, messages]); // Removing curriculumName from dependencies
+  }, [quill, messages]);
 
   return (
     <div className="w-full bg-white h-screen">
-      <div ref={quillRef} />
+      <div className="refference can go here" ref={generatedPdfRef}>
+        <div ref={quillRef} />
+      </div>
     </div>
   );
 };

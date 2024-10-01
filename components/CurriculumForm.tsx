@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { FaFileExport } from "react-icons/fa6";
+import { FaStop } from "react-icons/fa";
 import {
   Select,
   SelectContent,
@@ -307,6 +308,19 @@ const CurriculumForm = () => {
               >
                 Back
               </Button>
+              
+              <Button
+                type="button"
+                variant={"destructive"}
+                onClick={stop}
+                className="w-fit"
+              >
+                <div className="flex items-center gap-3">
+                <FaStop />
+                <p>Stop Generating</p>
+                </div>
+              </Button>
+              
               <Button
                 type="button"
                 onClick={() => exportAsPDF(formParams.curriculumName)}
@@ -318,21 +332,12 @@ const CurriculumForm = () => {
                   <FaFileExport size={20} className="text-white" />
                 </div>
               </Button>
-              <Button
-                type="button"
-                variant={"destructive"}
-                onClick={stop}
-                className="w-fit"
-              >
-                Stop Generating
-              </Button>
             </div>
 
             {messages.map((message) => (
-              <div key={message.id} ref={generatedPdfRef}>
+              <div key={message.id} >
                 {message.role !== "user" && (
-                  <TextEditor
-                    curriculumName={formParams.curriculumName}
+                  <TextEditor generatedPdfRef={generatedPdfRef}
                     messages={message.content}
                   />
                 )}
