@@ -1,9 +1,7 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -57,7 +55,9 @@ export function CurriculumList() {
               <TableCell className="text-left">
                 {curriculum.createdBy}
               </TableCell>
-              <TableCell className="text-right">{curriculum.createdAt}</TableCell>
+              <TableCell className="text-right">
+                {curriculum.createdAt}
+              </TableCell>
               <TableCell className="flex item gap-5 justify-end">
                 <Button variant={"outline"} size={"sm"} className="text-black">
                   Download
