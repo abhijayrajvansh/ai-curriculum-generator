@@ -8,75 +8,71 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "./ui/button";
+import { MdDeleteForever } from "react-icons/md";
 
-const invoices = [
+const curriculum_data = [
   {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
+    id: "CUR-001",
+    currName: "chess for dummies, become grandmaster",
+    createdBy: "Abhijay",
+    createdAt: "1st Oct 2024",
+    downloadLink: "",
   },
   {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
+    id: "CUR-002",
+    currName: "CRM development using microsoft dynamic 365",
+    createdBy: "Somya",
+    createdAt: "30th Sept 2024",
+    downloadLink: "",
   },
   {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
+    id: "CUR-003",
+    currName: "leads generation tool using outbound calls",
+    createdBy: "Yashank",
+    createdAt: "30th Sept 2024",
+    downloadLink: "",
   },
 ];
 
 export function CurriculumList() {
   return (
     <div>
-      <div className="flex w-full justify-around py-3 mb-2 font-semibold items-center bg-[#c88889]/50 rounded-md">
-        <div>Sr. No:</div>
-        <div>Curriculum Name</div>
-        <div>Created By</div>
-        <div>Created At</div>
-      </div>
-
-      {/* list of all curriculums */}
-
-      {/* {curriculum_data.map((item) => (
-        <div className="flex w-full justify-around py-3 items-center bg-[#4e564e] text-white rounded border border-background">
-          <div>{item.srn}</div>
-          <div>{item.curriculumName}</div>
-          <div>{item.createdAt}</div>
-          <div>{item.createdBy}</div>
-        </div>
-      ))} */}
       <Table>
-        <TableHeader>
+        <TableHeader className="bg-[#c88889]/50 border border-black">
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead className="w-[100px]">Sr. No:</TableHead>
+            <TableHead>Curriculum Name</TableHead>
+            <TableHead>Created By</TableHead>
+            <TableHead className="text-right">Created At</TableHead>
+            <TableHead className="text-right pr-12">Actions</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">
-                {invoice.totalAmount}
+
+        <TableBody className="bg-[#4e564e] border border-black">
+          {curriculum_data.map((curriculum) => (
+            <TableRow key={curriculum.id} className="text-white">
+              <TableCell className="font-medium">{curriculum.id}</TableCell>
+              <TableCell>{curriculum.currName}</TableCell>
+              <TableCell className="text-left">
+                {curriculum.createdBy}
+              </TableCell>
+              <TableCell className="text-right">{curriculum.createdAt}</TableCell>
+              <TableCell className="flex item gap-5 justify-end">
+                <Button variant={"outline"} size={"sm"} className="text-black">
+                  Download
+                </Button>
+                <Button
+                  variant={"destructive"}
+                  size={"sm"}
+                  className="text-white"
+                >
+                  <MdDeleteForever size={18} />
+                </Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter>
       </Table>
     </div>
   );
