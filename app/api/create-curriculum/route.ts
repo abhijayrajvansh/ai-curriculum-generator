@@ -10,8 +10,8 @@ export async function POST (req: Request) {
   const { messages } = await req.json();
 
   const result = await streamText({
-    model: ollama("llama3.2:3b"),
-    // model: openai('gpt-4o-mini'),
+    // model: ollama("llama3.2:3b"),
+    model: openai('gpt-4o-mini'),
     system: 'you are a helpful assistant, that creates detailed roadmap and curriculum for people to upskill.',
     messages: convertToCoreMessages(messages)
   })

@@ -73,6 +73,44 @@ const CurriculumForm = () => {
       });
   };
 
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const exportPDF = async () => {
+    if (!contentRef.current) {
+      console.error("Content reference is null");
+      return;
+    }
+
+    const input = contentRef.current;
+
+    // Capture content as a canvas
+    const canvas = await html2canvas(input, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+    // Calculate the height of the image in the PDF
+    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    // Add first page
+    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
+    heightLeft -= pdfHeight;
+
+    // While there is more content than fits on a single page, add new pages
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
+      heightLeft -= pdfHeight;
+    }
+
+    pdf.save("exported-content.pdf");
+  };
+
   const handleChange = (name: string, value: string | number) => {
     setFormParams((prevValues) => ({
       ...prevValues,
@@ -80,7 +118,7 @@ const CurriculumForm = () => {
     }));
   };
 
-  const prompt = `Generate a comprehensive learning roadmap and curate a curriculum for a ${formParams.level} student learning how to master ${formParams.topic}. The curriculum must follow ${formParams.industry} industry standards and should span ${formParams.duration}, including theory modules and practical labs. Each day should cover one specific task with hands-on exercises. Return the curriculum in HTML format, start with a small heading and week 1 or day 1`;
+  const prompt = `Generate a comprehensive learning roadmap and curate a curriculum for a ${formParams.level} student learning how to master ${formParams.topic}. The curriculum must follow ${formParams.industry} industry standards and should span ${formParams.duration}, including theory modules and practical labs. Each day should cover one specific task with hands-on exercises.`;
 
   const { messages, setInput, input, handleSubmit, stop, isLoading } = useChat({
     api: "/api/create-curriculum",
@@ -285,9 +323,10 @@ const CurriculumForm = () => {
       )}
 
       {step === 4 && (
-        <div className="flex h-screen xl:w-[800px]">
+        <div className="flex h-screen w-full">
           <div className="flex flex-col w-full mt-10 h-screen gap-3">
             <div className="text-4xl font-semibold">Generating curriculum</div>
+
             {isLoading ? (
               <p className="block text-sm font-medium text-gray-600 mb-3">
                 sit back & relax, your curriculum is being generated...
@@ -323,7 +362,7 @@ const CurriculumForm = () => {
               
               <Button
                 type="button"
-                onClick={() => exportAsPDF(formParams.curriculumName)}
+                onClick={() => exportPDF()}
                 className="bg-primary"
                 disabled={isLoading}
               >
@@ -335,11 +374,14 @@ const CurriculumForm = () => {
             </div>
 
             {messages.map((message) => (
-              <div key={message.id} >
+              <div key={message.id} className="w-full">
                 {message.role !== "user" && (
-                  <TextEditor generatedPdfRef={generatedPdfRef}
-                    messages={message.content}
-                  />
+
+                  <div className="w-full bg-white p-20" ref={contentRef}>
+                    <Markdown>
+                    {message.content}
+                  </Markdown>
+                  </div>
                 )}
               </div>
             ))}

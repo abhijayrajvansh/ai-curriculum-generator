@@ -25,7 +25,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   
   return (
-    <aside className="h-screen fixed top-0 hidden sm:block sm:w-[60px] lg:w-[250px]">
+    <aside className="h-screen fixed top-0 hidden sm:block sm:w-[60px] lg:w-[250px] print:hidden">
       <nav className="h-full flex flex-col justify-between bg-[#262626] text-white/80 border-r-2 border-gray-600 shadow-sm">
         <div>
           <div className="p-4 pb-2 flex gap-5 items-end border-b border-gray-700">
