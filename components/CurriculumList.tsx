@@ -1,48 +1,66 @@
-"use client"
-
-import { ColumnDef } from "@tanstack/react-table"
-import { DataTable } from "@/components/DataTable"
-
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
-}
-
-export const columns: ColumnDef<Payment>[] = [
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "./ui/button";
+import { MdDeleteForever } from "react-icons/md";
+const curriculum_data= [
   {
-    accessorKey: "status",
-    header: "Status",
+    id: "CURR-001",
+    curriculumName: "how to master software engineering",
+    createdBy: "abhijay",
+    createdAt: "30th Sept 2024",
+    downloadLink: "",
   },
   {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-  },
-]
+    id: "CURR-002",
+    curriculumName: "Devops with azure roadmap",
+    createdBy: "yashank",
+    createdAt: "1st Oct 2024",
+    downloadLink: "",
+  }
+];
 
-
-async function getData(): Promise<Payment[]> {
-  return [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-  ]
-}
-
-export default async function DemoPage() {
-  const data = await getData()
-
+export default function CurriculumList() {
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
+    <div className="rounded border bg-white">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Sr. No</TableHead>
+            <TableHead>Curriculum Name</TableHead>
+            <TableHead>Created By</TableHead>
+            <TableHead className="text-right">Created At</TableHead>
+            <TableHead className="text-right pr-12">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+       
+       <TableBody>
+          {curriculum_data.map((curriculum) => (
+            <TableRow key={curriculum.id}>
+              <TableCell>{curriculum.id}</TableCell>
+              <TableCell className="font-medium">{curriculum.curriculumName}</TableCell>
+              <TableCell>{curriculum.createdBy}</TableCell>
+              <TableCell className="text-right">{curriculum.createdAt}</TableCell>
+              <TableCell className="text-right">
+                <div className="flex items-center gap-3 justify-end">
+                <Button variant={'outline'} size={'sm'}>download</Button>
+                <Button variant={'destructive'} size={'sm'}>
+                  <MdDeleteForever size={20}/>
+                </Button>
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+
+      </Table>
     </div>
-  )
+  );
 }

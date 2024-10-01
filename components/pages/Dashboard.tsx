@@ -5,8 +5,7 @@ import Sidebar from "../Sidebar";
 import { Button } from "../ui/button";
 import { BiPlusCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import CurriculumList from '@/components/CurriculumList'
-
+import CurriculumList  from "@/components/CurriculumList";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -27,17 +26,13 @@ const Dashboard = () => {
                 ready to upskill yourself?
               </p>
             </div>
-            <Button
-              onClick={handleAddNew}
-              className="bg-primary space-x-3"
-            >
+            <Button onClick={handleAddNew} className="bg-primary space-x-3">
               <BiPlusCircle size={20} />
               <p>Add New</p>
             </Button>
           </div>
 
           <CurriculumList />
-
         </div>
       </div>
     </>
