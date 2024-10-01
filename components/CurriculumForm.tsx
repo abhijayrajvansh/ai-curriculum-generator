@@ -41,7 +41,7 @@ const CurriculumForm = () => {
 
     if (!pdfFileName) pdfFileName = "curriculum";
 
-    if (!input) return; // Add a check to ensure input is not null or undefined
+    if (!input) return; 
 
     html2canvas(input)
       .then((canvas) => {
@@ -270,7 +270,7 @@ const CurriculumForm = () => {
               Back
             </Button>
 
-            <Button variant={'destructive'} onClick={() => console.log(input)}>log prompt </Button>
+            {/* <Button variant={'destructive'} onClick={() => console.log(input)}>log prompt </Button> */}
 
             <Button
               type="button"
