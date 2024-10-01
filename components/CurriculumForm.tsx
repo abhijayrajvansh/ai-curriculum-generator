@@ -20,7 +20,7 @@ import jsPDF from "jspdf";
 import TextEditor from "./TextEditor";
 
 const CurriculumForm = () => {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
 
   const handleContinue = () => setStep((curr) => curr + 1);
   const handlePrevious = () => setStep((curr) => curr - 1);
@@ -79,7 +79,7 @@ const CurriculumForm = () => {
     }));
   };
 
-  const prompt = `Generate a comprehensive learning roadmap and curate a curriculum for a ${formParams.level} student learning how to master ${formParams.topic}. The curriculum must follow ${formParams.industry} industry standards and should span ${formParams.duration}, including theory modules and practical labs. Each day should cover one specific task with hands-on exercises.`;
+  const prompt = `Generate a comprehensive learning roadmap and curate a curriculum for a ${formParams.level} student learning how to master ${formParams.topic}. The curriculum must follow ${formParams.industry} industry standards and should span ${formParams.duration}, including theory modules and practical labs. Each day should cover one specific task with hands-on exercises. Return the curriculum in HTML format`;
 
   const { messages, setInput, input, handleSubmit, stop, isLoading } = useChat({
     api: "/api/create-curriculum",
@@ -326,25 +326,18 @@ const CurriculumForm = () => {
               >
                 Stop Generating
               </Button>
-              
             </div>
 
-            {/* {messages.map((message) => (
+            {messages.map((message) => (
               <div key={message.id}>
                 {message.role !== "user" && (
-                  <div
-                    ref={generatedPdfRef}
-                    className="border p-1 bg-white my-5"
-                  >
-                    <Markdown>{message.content}</Markdown>
-                  </div>
+                  <TextEditor
+                    curriculumName={formParams.curriculumName}
+                    messages={message.content}
+                  />
                 )}
               </div>
-            ))} */}
-
-            {/* dummy pdf sample a4 quill */}
-
-            <TextEditor />
+            ))}
           </div>
         </div>
       )}
