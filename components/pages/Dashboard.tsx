@@ -28,7 +28,7 @@ const Dashboard = () => {
             </div>
             <Button
               onClick={handleAddNew}
-              className="bg-[#5f6c5f]/90 hover:bg-[#5f6c5f] space-x-3"
+              className="bg-primary space-x-3"
             >
               <BiPlusCircle size={20} />
               <p>Add New</p>
@@ -36,6 +36,7 @@ const Dashboard = () => {
           </div>
 
           <CurriculumList />
+
         </div>
       </div>
     </>

@@ -110,14 +110,14 @@ const CurriculumForm = () => {
             name="curriculumName"
             value={formParams.curriculumName}
             onChange={(e) => handleChange(e.target.name, e.target.value)}
-            placeholder="e.g. Chess for Dummies"
+            placeholder="e.g. DevOps with Azure"
             className="bg-white"
           />
 
           <Button
             type="button"
             onClick={handleContinue}
-            className="bg-[#5f6c5f] hover:bg-[#5f6c5f]/90 w-fit"
+            className="bg-primary w-fit"
           >
             Continue
           </Button>
@@ -210,7 +210,7 @@ const CurriculumForm = () => {
             <Button
               type="button"
               onClick={() => handleSave()}
-              className="bg-[#5f6c5f] hover:bg-[#5f6c5f]/90 w-fit"
+              className="bg-primary w-fit"
             >
               Continue
             </Button>
@@ -275,7 +275,7 @@ const CurriculumForm = () => {
             <Button
               type="button"
               onClick={handleGenerate}
-              className="bg-[#5f6c5f] hover:bg-[#5f6c5f]/90 w-fit"
+              className="bg-primary w-fit"
             >
               Generate Curriculum
             </Button>
@@ -310,7 +310,7 @@ const CurriculumForm = () => {
               <Button
                 type="button"
                 onClick={() => exportAsPDF(formParams.curriculumName)}
-                className="bg-[#5f6c5f]/90 hover:bg-[#5f6c5f]"
+                className="bg-primary"
                 disabled={isLoading}
               >
                 <div className="flex gap-3">

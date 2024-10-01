@@ -29,7 +29,6 @@ export default function Sidebar() {
       <nav className="h-full flex flex-col justify-between bg-[#262626] text-white/80 border-r-2 border-gray-600 shadow-sm">
         <div>
           <div className="p-4 pb-2 flex gap-5 items-end border-b border-gray-700">
-            <Image height={30} width={30} className="p-1 bg-white rounded" src="/logo.jpeg" alt="uptut-logo" />
             <div className="font-semibold text-xl hidden lg:block">Dashboard</div>
           </div>
 
