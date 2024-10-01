@@ -79,7 +79,7 @@ const CurriculumForm = () => {
     }));
   };
 
-  const prompt = `Generate a comprehensive learning roadmap and curate a curriculum for a ${formParams.level} student learning how to master ${formParams.topic}. The curriculum must follow ${formParams.industry} industry standards and should span ${formParams.duration}, including theory modules and practical labs. Each day should cover one specific task with hands-on exercises. Return the curriculum in HTML format`;
+  const prompt = `Generate a comprehensive learning roadmap and curate a curriculum for a ${formParams.level} student learning how to master ${formParams.topic}. The curriculum must follow ${formParams.industry} industry standards and should span ${formParams.duration}, including theory modules and practical labs. Each day should cover one specific task with hands-on exercises. Return the curriculum in HTML format, start with a small heading and week 1 or day 1`;
 
   const { messages, setInput, input, handleSubmit, stop, isLoading } = useChat({
     api: "/api/create-curriculum",
@@ -329,7 +329,7 @@ const CurriculumForm = () => {
             </div>
 
             {messages.map((message) => (
-              <div key={message.id}>
+              <div key={message.id} ref={generatedPdfRef}>
                 {message.role !== "user" && (
                   <TextEditor
                     curriculumName={formParams.curriculumName}
