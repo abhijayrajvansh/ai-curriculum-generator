@@ -5,9 +5,15 @@ import Sidebar from "../Sidebar";
 import { Button } from "../ui/button";
 import { BiPlusCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import CurriculumList  from "@/components/CurriculumList";
+import CurriculumList from "@/components/CurriculumList";
 
-const Dashboard = () => {
+const Dashboard = ({
+  username,
+  email,
+}: {
+  username: string | null;
+  email: string | null;
+}) => {
   const router = useRouter();
 
   const handleAddNew = () => {
@@ -16,7 +22,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar username={username} email={email} />
       <div className="flex items-center justify-center">
         <div className="flex flex-col px-4 justify-center mx-auto w-full mt-12 sm:ml-[60px] lg:ml-64">
           <div className="flex justify-between">

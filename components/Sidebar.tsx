@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoNewspaperSharp } from "react-icons/io5";
 import { BiPlusCircle } from "react-icons/bi";
-import Image from "next/image";
+import { FaRegUser } from "react-icons/fa";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 const NAVIGATION_DATA = [
   {
@@ -20,21 +21,27 @@ const NAVIGATION_DATA = [
   },
 ];
 
-export default function Sidebar() {
-  
+export default function Sidebar({
+  username,
+  email,
+}: {
+  username: string | null;
+  email: string | null;
+}) {
   const pathname = usePathname();
-  
+
   return (
     <aside className="h-screen fixed top-0 hidden sm:block sm:w-[60px] lg:w-[250px] print:hidden">
       <nav className="h-full flex flex-col justify-between bg-[#262626] text-white/80 border-r-2 border-gray-600 shadow-sm">
         <div>
           <div className="p-4 pb-2 flex gap-5 items-end border-b border-gray-700">
-            <div className="font-semibold text-xl hidden lg:block">Dashboard</div>
+            <div className="font-semibold text-xl hidden lg:block">
+              Dashboard
+            </div>
           </div>
 
-         
           {NAVIGATION_DATA.map((item) => {
-            let currentPathname = "/" + item.link
+            let currentPathname = "/" + item.link;
 
             const isActive = pathname === currentPathname;
 
@@ -46,8 +53,7 @@ export default function Sidebar() {
               >
                 <nav
                   className={`sm:flex w-full items-center space-x-3 px-2 py-2 mt-3 rounded sm:hover:shadow-sm transition hover:bg-gray-600 ${
-                    isActive &&
-                    "bg-gray-700"
+                    isActive && "bg-gray-700"
                   }`}
                 >
                   <item.icon size={25} />
@@ -58,24 +64,28 @@ export default function Sidebar() {
           })}
         </div>
 
+        
+
+        <div>
+        <LogoutLink className="bg-red-500 w-full flex rounded-sm p-2 text-black">Log Out</LogoutLink>
         <div className="border-t border-gray-700 flex p-3">
-          <img
-            src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
-            alt=""
-            className="w-10 h-10 rounded-md"
-          />
-          <div
-            className={`
+          <div className="flex items-center">
+          
+            <FaRegUser size={18} />
+            <div
+              className={`
               flex justify-between items-center
               overflow-hidden transition-all w-52 ml-3
           `}
-          >
-            <div className="leading-4">
-              <h4 className="font-semibold">Abhijay Rajvansh</h4>
-              <span className="text-xs text-white/50">r.abhijay@uptut.com</span>
+            >
+              <div className="leading-4">
+                <h4 className="font-semibold">{username}</h4>
+                <span className="text-xs text-white/50">{email}</span>
+              </div>
+              <MoreVertical size={20} />
             </div>
-            <MoreVertical size={20} />
           </div>
+        </div>
         </div>
       </nav>
     </aside>
