@@ -13,25 +13,13 @@ interface TextEditorProps {
 const TextEditor = ({ curriculumName, messages }: TextEditorProps) => {
   const { quill, quillRef } = useQuill();
 
-  // Convert Markdown to HTML
-  const markdownToHtml = (markdown: string) => {
-    return (
-      <Markdown options={{ forceBlock: true }}>
-        {markdown}
-      </Markdown>
-    );
-  };
-
   useEffect(() => {
     if (quill) {
-      // Clear the editor's content before updating it
+      
       quill.setContents([]);
 
-      // Safely paste the new content
-      const formattedContent = markdownToHtml(messages).props.children;
       const htmlContent = `
-        <h1>${curriculumName}</h1>
-        ${formattedContent}
+        ${messages}
       `;
 
       quill.clipboard.dangerouslyPasteHTML(htmlContent);

@@ -270,7 +270,7 @@ const CurriculumForm = () => {
               Back
             </Button>
 
-            {/* <Button className="bg-yellow-200" variant={'outline'} onClick={() => console.log(input)}>log prompt </Button> */}
+            <Button variant={'destructive'} onClick={() => console.log(input)}>log prompt </Button>
 
             <Button
               type="button"
