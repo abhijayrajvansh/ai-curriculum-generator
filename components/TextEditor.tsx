@@ -2,8 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useQuill } from "react-quilljs";
-import "quill/dist/quill.snow.css"; // Add css for snow theme
-import Markdown from "markdown-to-jsx";
+import "quill/dist/quill.snow.css";
 
 interface TextEditorProps {
   curriculumName: string;
@@ -14,17 +13,17 @@ const TextEditor = ({ curriculumName, messages }: TextEditorProps) => {
   const { quill, quillRef } = useQuill();
 
   useEffect(() => {
-    if (quill) {
-      
-      quill.setContents([]);
+    if (quill && messages) {
+      // Get current HTML content of the editor
+      const currentContent = quill.root.innerHTML;
+      const htmlContent = messages;
 
-      const htmlContent = `
-        ${messages}
-      `;
-
-      quill.clipboard.dangerouslyPasteHTML(htmlContent);
+      // Only update if the new content is different
+      if (currentContent.trim() !== htmlContent.trim()) {
+        quill.clipboard.dangerouslyPasteHTML(htmlContent);
+      }
     }
-  }, [quill, curriculumName, messages]);
+  }, [quill, messages]); // Removing curriculumName from dependencies
 
   return (
     <div className="w-full bg-white h-screen">
