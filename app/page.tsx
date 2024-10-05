@@ -1,8 +1,12 @@
-import Home from '@/components/pages/Home'
-import React from 'react'
+import Home from "@/components/pages/Home";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import React from "react";
 
-const page = () => {
-  return <Home />
-}
+const page = async () => {
+  const { isAuthenticated } = getKindeServerSession();
+  const userIsAlreadyLoggedIn = await isAuthenticated();
 
-export default page
+  return <Home userIsAlreadyLoggedIn={userIsAlreadyLoggedIn} />;
+};
+
+export default page;

@@ -16,11 +16,9 @@ import {
 } from "@/components/ui/select";
 import { useChat } from "ai/react";
 import Markdown from "markdown-to-jsx";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import TextEditor from "./TextEditor";
+import axios from "axios";
 
-const CurriculumForm = () => {
+const CurriculumForm = ({ userEmail }:{ userEmail: string | null }) => {
   const [step, setStep] = useState(1);
 
   const handleContinue = () => setStep((curr) => curr + 1);
@@ -36,81 +34,6 @@ const CurriculumForm = () => {
 
   const generatedPdfRef = useRef<HTMLDivElement | null>(null);
 
-  const exportAsPDF = (fileName: string): void => {
-    const input = generatedPdfRef.current;
-    let pdfFileName = fileName;
-
-    if (!pdfFileName) pdfFileName = "curriculum";
-
-    if (!input) return; 
-
-    html2canvas(input)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4", true);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = pdf.internal.pageSize.getHeight();
-
-        const imgWidth = canvas.width;
-        const imgHeight = canvas.height;
-
-        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-        const imgX = (pdfWidth - imgWidth * ratio) / 2;
-        const imgY = 30;
-
-        pdf.addImage(
-          imgData,
-          "PNG",
-          imgX,
-          imgY,
-          imgWidth * ratio,
-          imgHeight * ratio
-        );
-        pdf.save(`${pdfFileName}.pdf`);
-      })
-      .catch((error) => {
-        console.error("Error generating PDF: ", error);
-      });
-  };
-
-  const contentRef = useRef<HTMLDivElement | null>(null);
-  const exportPDF = async () => {
-    if (!contentRef.current) {
-      console.error("Content reference is null");
-      return;
-    }
-
-    const input = contentRef.current;
-
-    // Capture content as a canvas
-    const canvas = await html2canvas(input, { scale: 2 });
-    const imgData = canvas.toDataURL("image/png");
-
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-
-    // Calculate the height of the image in the PDF
-    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-
-    let heightLeft = imgHeight;
-    let position = 0;
-
-    // Add first page
-    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
-    heightLeft -= pdfHeight;
-
-    // While there is more content than fits on a single page, add new pages
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
-      heightLeft -= pdfHeight;
-    }
-
-    pdf.save("exported-content.pdf");
-  };
-
   const handleChange = (name: string, value: string | number) => {
     setFormParams((prevValues) => ({
       ...prevValues,
@@ -118,7 +41,7 @@ const CurriculumForm = () => {
     }));
   };
 
-  const prompt = `Generate a comprehensive learning roadmap and curate a curriculum for a ${formParams.level} student learning how to master ${formParams.topic}. The curriculum must follow ${formParams.industry} industry standards and should span ${formParams.duration}, including theory modules and practical labs. Each day should cover one specific task with hands-on exercises.`;
+  const prompt = `Generate a comprehensive learning roadmap and curate a curriculum for a ${formParams.level} student learning how to master ${formParams.topic}. The curriculum must follow ${formParams.industry} industry standards and should span ${formParams.duration}, including theory modules and practical labs. For each day structure in bold font theory modules and practical labs, in each theory module and practical labs mention 2-3 points each`;
 
   const { messages, setInput, input, handleSubmit, stop, isLoading } = useChat({
     api: "/api/create-curriculum",
@@ -132,6 +55,53 @@ const CurriculumForm = () => {
   const handleGenerate = () => {
     handleSubmit();
     handleContinue();
+  };
+
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  const saveCurriculum = async (curriculumContent: string) => {
+    const curriculumData = {
+      curriculumName: formParams.curriculumName,
+      curriculumContent,
+      userEmail, // Make sure to capture the email field
+    };
+
+    try {
+      const response = await axios.post("/api/save-curriculum", {
+        curriculumData,
+      });
+
+    } catch (error) {
+      console.error("Error saving curriculum:", error);
+    }
+  };
+
+  const printContent = (filename: string) => {
+    if (contentRef.current) {
+
+      const content = contentRef.current.innerHTML;
+      saveCurriculum(content);
+
+      const printWindow = window.open("", "_blank");
+      printWindow?.document.write(`
+        <html>
+          <head>
+            <title>${filename}</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                padding: 20px;
+              }
+            </style>
+          </head>
+          <body>
+            ${contentRef.current.innerHTML}
+          </body>
+        </html>
+      `);
+      printWindow?.document.close();
+      printWindow?.print();
+    }
   };
 
   return (
@@ -347,7 +317,7 @@ const CurriculumForm = () => {
               >
                 Back
               </Button>
-              
+
               <Button
                 type="button"
                 variant={"destructive"}
@@ -355,19 +325,19 @@ const CurriculumForm = () => {
                 className="w-fit"
               >
                 <div className="flex items-center gap-3">
-                <FaStop />
-                <p>Stop Generating</p>
+                  <FaStop />
+                  <p>Stop Generating</p>
                 </div>
               </Button>
-              
+
               <Button
                 type="button"
-                onClick={() => exportPDF()}
+                onClick={() => printContent(formParams.curriculumName)}
                 className="bg-primary"
                 disabled={isLoading}
               >
                 <div className="flex gap-3">
-                  Export as pdf
+                  Save and export
                   <FaFileExport size={20} className="text-white" />
                 </div>
               </Button>
@@ -376,11 +346,8 @@ const CurriculumForm = () => {
             {messages.map((message) => (
               <div key={message.id} className="w-full">
                 {message.role !== "user" && (
-
                   <div className="w-full bg-white p-20" ref={contentRef}>
-                    <Markdown>
-                    {message.content}
-                  </Markdown>
+                    <Markdown>{message.content}</Markdown>
                   </div>
                 )}
               </div>

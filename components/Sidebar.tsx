@@ -7,6 +7,17 @@ import { IoNewspaperSharp } from "react-icons/io5";
 import { BiPlusCircle } from "react-icons/bi";
 import { FaRegUser } from "react-icons/fa";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { SlOptionsVertical } from "react-icons/sl";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "./ui/button";
 
 const NAVIGATION_DATA = [
   {
@@ -41,7 +52,7 @@ export default function Sidebar({
           </div>
 
           {NAVIGATION_DATA.map((item) => {
-            let currentPathname = "/" + item.link;
+            const currentPathname = "/" + item.link;
 
             const isActive = pathname === currentPathname;
 
@@ -64,28 +75,28 @@ export default function Sidebar({
           })}
         </div>
 
-        
-
         <div>
-        <LogoutLink className="bg-red-500 w-full flex rounded-sm p-2 text-black">Log Out</LogoutLink>
-        <div className="border-t border-gray-700 flex p-3">
-          <div className="flex items-center">
-          
-            <FaRegUser size={18} />
-            <div
-              className={`
-              flex justify-between items-center
-              overflow-hidden transition-all w-52 ml-3
-          `}
-            >
-              <div className="leading-4">
-                <h4 className="font-semibold">{username}</h4>
-                <span className="text-xs text-white/50">{email}</span>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <div className="flex items-center justify-evenly gap-3 border-t w-[58px] lg:w-[250px] border-gray-700 hover:bg-[#3f3e3e] p-2">
+                <FaRegUser size={25} />
+                <div className="lg:flex flex-col items-start hidden">
+                  <div className="font-semibold">{username}</div>
+                  <div className="text-xs text-white/50">{email}</div>
+                </div>
+                <div>
+                  <SlOptionsVertical />
+                </div>
               </div>
-              <MoreVertical size={20} />
-            </div>
-          </div>
-        </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem className="p-2 bg-red-500 rounded-md">
+                <LogoutLink className="font-semibold text-white">
+                  Log Out!
+                </LogoutLink>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </nav>
     </aside>

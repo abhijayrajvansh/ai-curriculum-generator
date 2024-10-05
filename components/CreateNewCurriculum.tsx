@@ -19,7 +19,7 @@ export default async function CreateNewCurriculum () {
     <>
       <Sidebar email={email} username={username}/>
       <div className="wrapper h-screen sm:ml-[60px] lg:ml-64">
-        <CurriculumForm />
+        <CurriculumForm userEmail={email}/>
       </div>
     </>
   );

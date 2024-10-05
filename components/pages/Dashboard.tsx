@@ -38,7 +38,7 @@ const Dashboard = ({
             </Button>
           </div>
 
-          <CurriculumList />
+          <CurriculumList userEmail={email}/>
         </div>
       </div>
     </>
